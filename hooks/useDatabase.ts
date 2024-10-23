@@ -18,7 +18,7 @@ export const useDatabase = create<Database>(() => ({}))
 openDatabaseAsync('time')
   .then(async db => {
     await db.runAsync(`
-CREATE DATABASE IF NOT EXISTS
+CREATE TABLE IF NOT EXISTS
   user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL UNIQUE,
@@ -27,4 +27,6 @@ CREATE DATABASE IF NOT EXISTS
 `);
     useDatabase.setState({ db })
   })
+  .catch(console.error)
+  .catch(alert)
 

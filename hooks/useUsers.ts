@@ -3,7 +3,7 @@ import { Schema, useDatabase } from "./useDatabase"
 export type Users = {
   registered: (name: string) => Promise<boolean>
   register: (name: string, password: string) => Promise<void>,
-  login: (name: string, password: string) => Promise<boolean>
+  exists: (name: string, password: string) => Promise<boolean>
 }
 
 export const useUsers = (): Users => {
@@ -14,7 +14,7 @@ export const useUsers = (): Users => {
   if (!db) return {
     registered: databaseNotInitialized,
     register: databaseNotInitialized,
-    login: databaseNotInitialized
+    exists: databaseNotInitialized
   }
   return {
     registered: async (name: string) =>
@@ -22,7 +22,7 @@ export const useUsers = (): Users => {
     register: async (name: string, password: string) => {
       await db.runAsync('INSERT INTO user(name, password) VALUES (?, ?)', [name, password])
     },
-    login: async (name: string, password: string) =>
+    exists: async (name: string, password: string) =>
       !!await db.getFirstAsync<Schema.user>('SELECT * FROM user WHERE name = ? AND password = ?', [name, password]),
   }
 }

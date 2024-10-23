@@ -1,15 +1,5 @@
-import { Column } from "@/components/Column";
-import { H } from "@/components/H";
-import { P } from "@/components/P";
-import { Screen } from "@/components/Screen";
+import { Redirect } from "expo-router";
 
 export default function Index() {
-  return (
-    <Screen>
-      <Column>
-        <H>Welcome to the Time Manager!</H>
-        <P>This is my uni work</P>
-      </Column>
-    </Screen>
-  )
+  return <Redirect href="/login" />
 }
