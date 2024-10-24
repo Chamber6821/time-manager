@@ -1,5 +1,5 @@
 import { useSession } from "@/hooks/useSession";
-import { Redirect, Slot, router } from "expo-router";
+import { Redirect, Slot } from "expo-router";
 
 export default function AppLayout() {
   const { username } = useSession()

@@ -9,29 +9,26 @@ import { useUsers } from "@/hooks/useUsers";
 import { Link, router } from "expo-router";
 import { useState } from "react";
 
-export default function Register() {
+export default function LoginIndex() {
   const { enterUsername, enterPassword } = useNativeText()
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
-  const { registered, register } = useUsers()
+  const { exists } = useUsers()
   const { login } = useSession()
   return (
     <Column style={{ gap: 5 }}>
-      <H>Register</H>
+      <H>Login</H>
       <Input value={name} onChange={e => setName(e.nativeEvent.text)} placeholder={enterUsername} />
       <Input value={password} onChange={e => setPassword(e.nativeEvent.text)} placeholder={enterPassword} secureTextEntry />
       <Button onPress={async () => {
-        if (await registered(name)) {
-          alert('Опоздал. Такой пользователь уже есть')
+        if (!await exists(name, password)) {
+          alert('НЕ ПРАВИОЛЬНО. Попробуй. Еще. Раз.')
           return
         }
-        alert('Ты победил...')
-        await register(name, password)
         login(name)
-        router.replace('/(app)')
-      }}><P>Зарегистрироваться</P></Button>
-      <Link href="/login"><P>У меня еже есть аккаунт</P></Link>
+        router.replace('/app')
+      }}><P>Войти</P></Button>
+      <Link href="./register"><P>Зарегистрироваться</P></Link>
     </Column >
   )
 }
-
