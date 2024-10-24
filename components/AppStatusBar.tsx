@@ -12,7 +12,7 @@ export default function AppStatusBar() {
   return (
     <Row style={{
       width: '100%',
-      padding: 8,
+      paddingTop: 8,
       justifyContent: 'space-between',
       backgroundColor: colors.background,
     }}>
