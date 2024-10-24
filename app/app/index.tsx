@@ -11,13 +11,15 @@ export default function AppIndex() {
   ]
   return (
     <Column style={{
-      margin: 8,
+      width: '100%',
+      padding: 8,
     }}>
       <Column style={{
+        width: '100%',
         height: '100%',
         justifyContent: 'flex-start',
       }}>
-        <Column style={{ gap: 10 }}>
+        <Column style={{ width: '100%', gap: 10 }}>
           {
             activities.map(x => (
               <Activity

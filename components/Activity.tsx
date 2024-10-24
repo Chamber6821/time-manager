@@ -10,21 +10,21 @@ export default function Activity(props: {
   durationMins: number
 }) {
   return (
-    <Row style={{
+    <Column style={{
       width: '100%',
+      left: 0,
+      right: 0,
       backgroundColor: props.color,
       borderRadius: 16,
       padding: 16,
       gap: 10,
-      justifyContent: 'space-between'
+      alignItems: 'flex-start'
     }}>
-      <Column style={{
-        alignItems: 'flex-start'
-      }}>
-        <H>{props.name}</H>
+      <H>{props.name}</H>
+      <Row style={{ width: '100%', justifyContent: 'space-between' }}>
         <P>{props.description}</P>
-      </Column>
-      <H>{props.durationMins} минут</H>
-    </Row>
+        <H>{props.durationMins} минут</H>
+      </Row>
+    </Column>
   )
 }
