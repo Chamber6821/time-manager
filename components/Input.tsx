@@ -6,13 +6,12 @@ export const Input = (props: TextInput['props']) => {
   return (
     <TextInput
       style={{
-        width: 200,
-        height: 30,
+        width: '100%',
         backgroundColor: colors.onBackground,
         fontSize: 20,
         borderRadius: 5,
-        paddingVertical: 2,
-        paddingHorizontal: 5
+        paddingVertical: 8,
+        paddingHorizontal: 16,
       }}
       {...props}
     />
