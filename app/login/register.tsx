@@ -16,7 +16,10 @@ export default function Register() {
   const { registered, register } = useUsers()
   const { login } = useSession()
   return (
-    <Column style={{ gap: 5 }}>
+    <Column style={{
+      width: '70%',
+      gap: 5,
+    }}>
       <H>Register</H>
       <Input value={name} onChange={e => setName(e.nativeEvent.text)} placeholder={enterUsername} />
       <Input value={password} onChange={e => setPassword(e.nativeEvent.text)} placeholder={enterPassword} secureTextEntry />
@@ -29,7 +32,7 @@ export default function Register() {
         login(name)
         router.replace('/app')
       }}><P>Зарегистрироваться</P></Button>
-      <Link href="/login"><P>У меня еже есть аккаунт</P></Link>
+      <Link href="/login" replace><P>У меня еже есть аккаунт</P></Link>
     </Column >
   )
 }

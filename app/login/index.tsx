@@ -16,7 +16,10 @@ export default function LoginIndex() {
   const { exists } = useUsers()
   const { login } = useSession()
   return (
-    <Column style={{ gap: 5 }}>
+    <Column style={{
+      width: '70%',
+      gap: 5,
+    }}>
       <H>Login</H>
       <Input value={name} onChange={e => setName(e.nativeEvent.text)} placeholder={enterUsername} />
       <Input value={password} onChange={e => setPassword(e.nativeEvent.text)} placeholder={enterPassword} secureTextEntry />
@@ -28,7 +31,7 @@ export default function LoginIndex() {
         login(name)
         router.replace('/app')
       }}><P>Войти</P></Button>
-      <Link href="./register"><P>Зарегистрироваться</P></Link>
+      <Link href="./register" replace><P>Зарегистрироваться</P></Link>
     </Column >
   )
 }

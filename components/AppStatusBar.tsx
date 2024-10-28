@@ -12,6 +12,7 @@ export default function AppStatusBar() {
   return (
     <Row style={{
       width: '100%',
+      height: 'auto',
       paddingTop: 8,
       justifyContent: 'space-between',
       backgroundColor: colors.background,
@@ -20,7 +21,9 @@ export default function AppStatusBar() {
         <FontAwesome5 name="user-astronaut" size={36} color={colors.onBackground} />
         <H>{username}</H>
       </Row>
-      <Button onPress={logout}><P>Выйти</P></Button>
+      <Row>
+        <Button onPress={logout}><P>Выйти</P></Button>
+      </Row>
     </Row >
   )
 }
