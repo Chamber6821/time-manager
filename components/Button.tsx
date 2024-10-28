@@ -6,6 +6,7 @@ export default function Button(props: PressableProps) {
   return (
     <Pressable
       style={{
+        width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.primary,
