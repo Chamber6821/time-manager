@@ -5,6 +5,7 @@ import { H } from './H'
 import Button from './Button'
 import { useColors } from '@/hooks/useColors'
 import { FontAwesome5 } from '@expo/vector-icons'
+import { Column } from './Column'
 
 export default function AppStatusBar() {
   const colors = useColors()
@@ -21,9 +22,9 @@ export default function AppStatusBar() {
         <FontAwesome5 name="user-astronaut" size={36} color={colors.onBackground} />
         <H>{username}</H>
       </Row>
-      <Row>
+      <Column style={{ width: 'auto' }}>
         <Button onPress={logout}><P>Выйти</P></Button>
-      </Row>
+      </Column>
     </Row >
   )
 }
