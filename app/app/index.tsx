@@ -1,9 +1,6 @@
 import Activity from "@/components/Activity";
-import { Centered } from "@/components/Centered";
 import { Column } from "@/components/Column";
-import { Row } from "@/components/Row";
 import { useColors } from "@/hooks/useColors";
-import { Entypo } from "@expo/vector-icons";
 import { View } from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
 
@@ -57,20 +54,13 @@ export default function AppIndex() {
     },
   ]
   return (
-    <Column style={{
-      width: '100%',
-      paddingVertical: 8,
-    }}>
-      <Column style={{
-        width: '100%',
-        height: '100%',
-        justifyContent: 'flex-start',
-      }}>
+    <Column style={{ paddingVertical: 8 }}>
+      <Column style={{ justifyContent: 'flex-start' }}>
         <SwipeListView
           data={activities}
           renderItem={x =>
             <View style={{ marginBottom: 8 }}>
-              <Activity
+              <Activity.Card
                 key={x.item.id}
                 name={x.item.name}
                 description="aboba"
@@ -81,23 +71,11 @@ export default function AppIndex() {
           }
           renderHiddenItem={x =>
             <View style={{ marginBottom: 8 }}>
-              <Row style={{
-                height: '100%',
-                padding: 4,
-                justifyContent: 'flex-end',
-                borderRadius: 16,
-                borderWidth: 4,
-                borderColor: colors.primary,
-                overflow: 'hidden'
-              }}>
-                <Centered style={{ height: '100%', aspectRatio: 1 }}>
-                  <Entypo
-                    name="pencil"
-                    size={36}
-                    color={colors.onBackground}
-                  />
-                </Centered>
-              </Row>
+              <Activity.Back
+                key={x.item.id}
+                color={colors.primary}
+                buttonColor={colors.onBackground}
+              />
             </View>
           }
           disableRightSwipe={true}
