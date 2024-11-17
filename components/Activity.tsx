@@ -4,12 +4,15 @@ import { H } from "./H"
 import { P } from "./P"
 import { Row } from "./Row"
 
+const formatTime = (time: Date) => /\d{2}:\d{2}/.exec(time.toISOString())!.at(0)!
+
 export namespace Activity {
   export const Card = (props: {
     name: string,
-    description: string,
+    description?: string,
     color: string,
-    durationMins: number
+    start: Date,
+    end: Date
   }) =>
     <Column style={{
       left: 0,
@@ -20,11 +23,15 @@ export namespace Activity {
       gap: 10,
       alignItems: 'flex-start'
     }}>
-      <H>{props.name}</H>
       <Row style={{ width: '100%', height: 'auto', justifyContent: 'space-between' }}>
-        <P>{props.description}</P>
-        <H>{props.durationMins} минут</H>
+        <H>{props.name}</H>
+        <Row style={{ justifyContent: 'flex-end' }}>
+          <P>{formatTime(props.start)}</P>
+          <P> - </P>
+          <P>{formatTime(props.end)}</P>
+        </Row>
       </Row>
+      {props.description && <P>{props.description}</P>}
     </Column>
 
   export const Back = (props: {
