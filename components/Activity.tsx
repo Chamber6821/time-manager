@@ -4,7 +4,7 @@ import { H } from "./H"
 import { P } from "./P"
 import { Row } from "./Row"
 
-const formatTime = (time: Date) => /\d{2}:\d{2}/.exec(time.toISOString())!.at(0)!
+const formatTime = (time: Date) => time.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })
 
 export namespace Activity {
   export const Card = (props: {
