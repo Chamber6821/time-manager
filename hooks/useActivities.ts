@@ -61,6 +61,7 @@ export const useActivities = (username: string): Activities => {
       [userId, activity.groupId, +activity.started, +activity.ended, activity.description]
     ).then(x => x.lastInsertRowId),
     update: async (id: ActivityId, activity: Partial<Omit<Activity, 'id'>>) => {
+      setActivities(prev => prev.map(x => x.id === id ? { ...x, ...activity } : x))
       await db.runAsync(`
 UPDATE activity
 SET
@@ -78,6 +79,7 @@ WHERE id = ?;`,
         ])
     },
     delete: async (id: ActivityId) => {
+      setActivities(prev => prev.filter(x => x.id !== id))
       await db.runAsync('DELETE FROM activity WHERE id = ?', [id])
     }
   }

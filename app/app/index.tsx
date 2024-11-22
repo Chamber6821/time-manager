@@ -8,7 +8,7 @@ import { useGroups } from "@/hooks/useGroups";
 import { useSession } from "@/hooks/useSession";
 import { Feather, FontAwesome, FontAwesome6 } from "@expo/vector-icons";
 import { Link } from "expo-router";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { useBaseDate } from "@/hooks/useBaseDate";
@@ -18,7 +18,7 @@ export default function AppIndex() {
   const colors = useColors()
   const { username } = useSession()
   if (!username) return <></>
-  const { activities } = useActivities(username)
+  const { activities, delete: deleteActivity } = useActivities(username)
   const { withId: groupWithId } = useGroups()
   const { baseDate, set: setBaseDate } = useBaseDate()
   const [chooseBaseDate, setChooseBaseDate] = useState(false)
@@ -47,6 +47,12 @@ export default function AppIndex() {
           renderHiddenItem={x =>
             <View style={{ marginBottom: 8 }}>
               <Activity.Back
+                onDelete={() => {
+                  Alert.alert('Удаление активности', `Вы уверены что хотите удалить '${x.item.description}'`, [
+                    { text: 'Отмена', style: 'cancel' },
+                    { text: 'Удалить', onPress: () => { deleteActivity(x.item.id) } }
+                  ])
+                }}
                 key={x.item.id}
                 color={groupWithId(x.item.groupId).color}
                 buttonColor={colors.onBackground}
