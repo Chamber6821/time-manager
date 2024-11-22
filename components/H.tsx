@@ -7,6 +7,7 @@ export const H = (props: Text['props'] & { color?: Color }) => {
     <Text
       {...props}
       style={[{
+        flexShrink: 1,
         color: colors[props.color || 'onBackground'],
         fontSize: 24
       }, props.style]}

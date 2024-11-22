@@ -38,7 +38,7 @@ export default function AppIndex() {
         <SwipeListView
           data={filteredActivities}
           renderItem={x =>
-            <View style={{ marginBottom: 8 }}>
+            <View style={{ marginBottom: 8, maxWidth: '100%' }}>
               <Activity.Card
                 key={x.item.id}
                 name={x.item.description}
@@ -49,24 +49,37 @@ export default function AppIndex() {
             </View>
           }
           renderHiddenItem={x =>
-            <View style={{ marginBottom: 8 }}>
-              <Activity.Back
-                onDelete={() => {
-                  Alert.alert('Удаление активности', `Вы уверены что хотите удалить '${x.item.description}'`, [
-                    { text: 'Отмена', style: 'cancel' },
-                    { text: 'Удалить', onPress: () => { deleteActivity(x.item.id) } }
-                  ])
-                }}
-                onEdit={() => router.push({
-                  pathname: '/app/activity/[id]',
-                  params: {
-                    id: x.item.id
-                  }
-                })}
-                key={x.item.id}
-                color={groupWithId(x.item.groupId).color}
-                buttonColor={colors.onBackground}
-              />
+            <View
+              key={x.item.id}
+              style={{ position: 'relative', marginBottom: 8, maxWidth: '100%' }}
+            >
+              <View style={{ opacity: 0 }}>
+                <Activity.Card
+                  key={x.item.id}
+                  name={x.item.description}
+                  color={groupWithId(x.item.groupId).color}
+                  start={x.item.started}
+                  end={x.item.ended}
+                />
+              </View>
+              <View style={{ position: 'absolute', width: '100%', height: '100%' }}>
+                <Activity.Back
+                  onDelete={() => {
+                    Alert.alert('Удаление активности', `Вы уверены что хотите удалить '${x.item.description}'`, [
+                      { text: 'Отмена', style: 'cancel' },
+                      { text: 'Удалить', onPress: () => { deleteActivity(x.item.id) } }
+                    ])
+                  }}
+                  onEdit={() => router.push({
+                    pathname: '/app/activity/[id]',
+                    params: {
+                      id: x.item.id
+                    }
+                  })}
+                  color={groupWithId(x.item.groupId).color}
+                  buttonColor={colors.onBackground}
+                />
+              </View>
             </View>
           }
           leftOpenValue={150}
