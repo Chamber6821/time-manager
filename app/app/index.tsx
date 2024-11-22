@@ -13,8 +13,11 @@ import { SwipeListView } from "react-native-swipe-list-view";
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { useBaseDate } from "@/hooks/useBaseDate";
 import { useMemo, useState } from "react";
+import { exportUserDataToExcel } from "@/utils/exportUserDataToExcel";
+import { useDatabase } from "@/hooks/useDatabase";
 
 export default function AppIndex() {
+  const { db } = useDatabase()
   const colors = useColors()
   const { username } = useSession()
   if (!username) return <></>
@@ -28,6 +31,7 @@ export default function AppIndex() {
     [activities, baseDate]
   )
 
+  if (!db) return <></>
   return (
     <Column style={{ paddingVertical: 8, height: '100%' }}>
       <Column style={{ flexGrow: 1, justifyContent: 'flex-start' }}>
@@ -86,7 +90,7 @@ export default function AppIndex() {
           </Link>
         </Column>
         <Column style={{ width: 'auto' }}>
-          <Link href="/app/groups" asChild>
+          <Link href="/app/groups" asChild onLongPress={() => exportUserDataToExcel(db, username)}>
             <Button>
               <Feather name="settings" size={24} color={colors.onBackground} />
             </Button>
