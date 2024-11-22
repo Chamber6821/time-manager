@@ -144,6 +144,11 @@ android {
             useLegacyPackaging (findProperty('expo.useLegacyPackaging')?.toBoolean() ?: false)
         }
     }
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
 }
 
 // Apply static values from `gradle.properties` to the `android.packagingOptions`
@@ -193,6 +198,9 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    implementation(fileTree(dir: 'libs', include: ['*.jar']))
+    implementation('com.facebook.react:react-native:+')
 }
 
 if (rnVersion < versionToNumber(0, 75, 0)) {
