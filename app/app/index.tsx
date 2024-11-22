@@ -71,9 +71,11 @@ export default function AppIndex() {
           </Link>
         </Column>
         <Column style={{ width: 'auto' }}>
-          <Button>
-            <Feather name="settings" size={24} color={colors.onBackground} />
-          </Button>
+          <Link href="/app/groups" asChild>
+            <Button>
+              <Feather name="settings" size={24} color={colors.onBackground} />
+            </Button>
+          </Link>
         </Column>
       </Row>
       {chooseBaseDate && <DateTimePicker

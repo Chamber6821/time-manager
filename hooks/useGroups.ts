@@ -50,6 +50,7 @@ export const useGroups = (): Groups => {
       [group.name, group.color]
     ).then(x => x.lastInsertRowId),
     update: async (id: GroupId, group: Partial<Omit<Group, 'id'>>) => {
+      setGroups(prev => prev.map(x => x.id === id ? { ...x, ...group } : x))
       await db.runAsync(`
 UPDATE activity_group
 SET
