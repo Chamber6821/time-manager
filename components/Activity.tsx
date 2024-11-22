@@ -36,11 +36,14 @@ export namespace Activity {
 
   export const Back = (props: {
     color: string,
-    buttonColor: string
+    buttonColor: string,
+    onEdit?: () => void,
+    onDelete?: () => void,
   }) =>
     <Row style={{
       padding: 4,
-      justifyContent: 'flex-end',
+      paddingHorizontal: 8,
+      justifyContent: 'space-between',
       borderRadius: 16,
       borderWidth: 4,
       borderColor: props.color,
@@ -48,6 +51,15 @@ export namespace Activity {
     }}>
       <Row style={{ aspectRatio: 1 }}>
         <Entypo
+          onPress={props.onDelete}
+          name="trash"
+          size={36}
+          color={props.buttonColor}
+        />
+      </Row>
+      <Row style={{ aspectRatio: 1 }}>
+        <Entypo
+          onPress={props.onEdit}
           name="pencil"
           size={36}
           color={props.buttonColor}
