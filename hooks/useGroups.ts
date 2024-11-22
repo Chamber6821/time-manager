@@ -68,10 +68,11 @@ WHERE id = ?;`,
     },
     withId: (id: GroupId) => {
       const group = groups.find(g => g.id === id)
-      if (!group) {
-        return groups[0]
+      return group || groups[0] || {
+        id: 0,
+        name: 'Default',
+        color: '#afd'
       }
-      return group
     }
   }
 }
