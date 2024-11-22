@@ -7,7 +7,7 @@ import { useColors } from "@/hooks/useColors";
 import { useGroups } from "@/hooks/useGroups";
 import { useSession } from "@/hooks/useSession";
 import { Feather, FontAwesome, FontAwesome6 } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { Alert, View } from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
 import DateTimePicker from '@react-native-community/datetimepicker'
@@ -53,6 +53,12 @@ export default function AppIndex() {
                     { text: 'Удалить', onPress: () => { deleteActivity(x.item.id) } }
                   ])
                 }}
+                onEdit={() => router.push({
+                  pathname: '/app/activity/[id]',
+                  params: {
+                    id: x.item.id
+                  }
+                })}
                 key={x.item.id}
                 color={groupWithId(x.item.groupId).color}
                 buttonColor={colors.onBackground}
@@ -65,7 +71,10 @@ export default function AppIndex() {
       </Column>
       <Row style={{ width: '100%', height: 'auto', justifyContent: 'space-evenly' }}>
         <Column style={{ width: 'auto' }}>
-          <Button onPress={() => setChooseBaseDate(true)}>
+          <Button
+            onPress={() => setChooseBaseDate(true)}
+            onLongPress={() => setBaseDate(new Date())}
+          >
             <FontAwesome name="calendar-o" size={24} color={colors.onBackground} />
           </Button>
         </Column>
@@ -89,10 +98,7 @@ export default function AppIndex() {
         mode="date"
         onChange={(_, newDate) => {
           setChooseBaseDate(false)
-          if (!newDate) return
-          const copy = new Date(baseDate)
-          copy.setFullYear(newDate.getFullYear(), newDate.getMonth(), newDate.getDate())
-          setBaseDate({ baseDate: copy })
+          newDate && setBaseDate(newDate)
         }}
       />}
     </Column>
