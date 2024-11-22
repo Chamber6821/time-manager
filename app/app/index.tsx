@@ -8,7 +8,7 @@ import { useGroups } from "@/hooks/useGroups";
 import { useSession } from "@/hooks/useSession";
 import { Feather, FontAwesome, FontAwesome6 } from "@expo/vector-icons";
 import { Link, router } from "expo-router";
-import { Alert, View } from "react-native";
+import { NativeModules, Alert, View } from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { useBaseDate } from "@/hooks/useBaseDate";
@@ -30,6 +30,11 @@ export default function AppIndex() {
     activities.filter(x => x.started.toDateString() === baseDate.toDateString()),
     [activities, baseDate]
   )
+
+  const { MyCppCode } = NativeModules
+  console.log(MyCppCode)
+  console.log(MyCppCode.stringFromJNI)
+  console.log(MyCppCode.stringFromJNI())
 
   if (!db) return <></>
   return (
@@ -96,7 +101,7 @@ export default function AppIndex() {
           </Button>
         </Column>
         <Column style={{ width: 'auto' }}>
-          <Link href="/app/activity/new" asChild>
+          <Link href="/app/activity/new" asChild onLongPress={() => alert(MyCppCode.stringFromJNI())}>
             <Button>
               <FontAwesome6 name="add" size={24} color={colors.onBackground} />
             </Button>
